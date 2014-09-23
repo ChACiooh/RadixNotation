@@ -1,76 +1,30 @@
 #include <iostream>
-#include <stdlib.h>
 
 using namespace std;
 
+char arr[1000][1000];
+
 int main()
 {
-	int x, y, save_x, save_y;
-	char **x_y_plane;
+	int x, y, max_x, max_y;
+	max_x = max_y = 0;
 	while(true)
 	{
 		cin >> x >> y;
 		if(x<0 || y<0)	break;
+		if(max_x<x)	max_x = x;
+		if(max_y<y)	max_y = y;
 
-		// initializing array
-		if(x_y_plane == null)
+		for(int i=0;i<=max_y;i++)
 		{
-			x_y_plane = (char**)malloc(sizeof(char*)*(y+1));
-			for(int i=0;i<=y;i++)
-				x_y_plane[i] = (char*)malloc(sizeof(char)*(x+1));
-		}
-		else
-		{
-			if(y > save_y)
+			for(int j=0;j<=max_x;j++)
 			{
-				x_y_plane = (char**)realloc(sizeof(char*)*(y+1));
-				if(x > save_x)
-				{
-					for(int i=save_y;i<=y;i++)
-						x_y_plane[i] = (char*)malloc(sizeof(char)*(x+1));
-				}
-				else
-				{
-					for(int i=save_y;i<=y;i++)
-						x_y_plane[i] = (char*)malloc(sizeof(char)*(save_x+1));
-				}
+				if(j == x && y == i)	arr[i][j] = '*';
+				if(arr[i][j] == '*')	continue;
+				else	arr[i][j] = '.';
 			}
-			else if(x > save_x)
-			{
-				if(y > save_y)
-				{
-					x_y_plane = (char**)realloc(sizeof(char*)*(y+1));
-					for(int i=0;i<=y;i++)
-					{
-						if(x_y_plane[i] == null)	x_y_plane[i] = (char*)malloc(sizeof(char)*(x+1));
-						else	x_y_plane[i] = (char*)realloc(sizeof(char)*(x+1));
-					}
-				}
-				else
-				{
-					for(int i=0;i<=save_y;i++)
-						x_y_plane[i] = (char*)realloc(sizeof(char)*(x+1));
-				}
-			}
-			
+			cout << arr[i] << endl;
 		}
-
-		// drawing
-		for(int i=0;i<=y;i++)
-		{
-			for(int j=0;j<=x;j++)
-			{
-				if(i == y && j == x)	x_y_plane[i][j] = '*';
-				if(x_y_plane[i][j] == '*')	continue;
-				else	x_y_plane[i][j] = '.';
-			}
-			cout << x_y_plane[i] << endl;
-		}
-
-		// save previous x, y
-		save_x = x;
-		save_y = y;
 	}
-	free(x_y_plane);
 	return 0;
 }
