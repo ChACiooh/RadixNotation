@@ -22,7 +22,7 @@ int DifferenceIntSet(int *set1, int len1, int *set2, int len2, int *res);
 
 int main()
 {
-	char *buffer[1000];
+	char buffer[1000][1000];
 	int i = 0, setCnt = 0, len1, len2, res_size;
 	int *set1, *set2, *result;
 	char operator_;
@@ -31,7 +31,8 @@ int main()
 	while(scanf("%s", buffer[i]) != EOF || setCnt < 3)
 	{
 		if(i == 0 && buffer[i][0] != '{')	return 0;
-		//if(buffer[i][0] == '\n')	break;
+		char temp = getchar();
+		if(temp == '\n')	break;
 		if(buffer[i][0] == '{')
 		{
 			setCnt++;
@@ -87,6 +88,7 @@ int main()
 		cout << result[i] << " ";
 	}
 	cout << "}" << endl;
+	free(set1); free(set2); free(result);
 	return 0;
 }
 
