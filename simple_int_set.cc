@@ -26,13 +26,13 @@ int main()
 	int i = 0, setCnt = 0, len1, len2, res_size;
 	int *set1, *set2, *result;
 	char operator_;
+	len1 = len2 = res_size = 0;
 
 	// process for input
 	while(scanf("%s", buffer[i]) != EOF || setCnt < 3)
 	{
 		if(i == 0 && buffer[i][0] != '{')	return 0;
 		char temp = getchar();
-		if(temp == '\n')	break;
 		if(buffer[i][0] == '{')
 		{
 			setCnt++;
@@ -53,9 +53,10 @@ int main()
 					break;
 			}
 			i++;
+			if(temp == '\n')	break;
 			continue;
 		}
-		else if(buffer[i][0] == '+' || buffer[i][0] == '-' || buffer[i][0] == '*')
+		else if(buffer[i][0] == '+' || buffer[i][0] == '-' || buffer[i][0] == 'x')
 		{
 			operator_ = buffer[i][0];
 			i++;
@@ -73,7 +74,7 @@ int main()
 		case '+':
 			res_size = UnionIntSet(set1, len1, set2, len2, result);
 			break;
-		case '*':
+		case 'x':
 			res_size = IntersectIntSet(set1, len1, set2, len2, result);
 			break;
 		case '-':
@@ -88,7 +89,7 @@ int main()
 		cout << result[i] << " ";
 	}
 	cout << "}" << endl;
-	free(set1); free(set2); free(result);
+	delete[](set1); delete[](set2); delete[](result);
 	return 0;
 }
 
@@ -101,10 +102,10 @@ int InputIntSet(int *set, int len)
 		temp[i++] = myQ.front();
 		myQ.pop();
 	}
-
+	int j = i;
 	set = new int[len];
 	i = 0;
-	while(!myQ.empty())
+	while(i<j)
 	{
 		int now = temp[i];
 		if(i>0 && set[i-1] == now)	continue;
@@ -113,6 +114,11 @@ int InputIntSet(int *set, int len)
 		i++;
 	}
 	sort(set, set+i);
+	cout << "{ ";
+	for(int j = 0; j < i; j++)
+		cout << set[j] << " ";
+	cout << "}" << endl;
+	delete[](temp);
 	return i;
 }
 
@@ -188,5 +194,6 @@ int DeferenceIntSet(int *set1, int len1, int *set2, int len2, int *res)
 		if(!find)
 			res[cnt++] = now;
 	}
+	delete[](intersect);
 	return cnt;
 }
