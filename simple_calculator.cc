@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 				operand /= num;
 				break;
 		}
+		if(i+1 >= argc)	return -1;
 		sscanf(argv[i+1], "%c", &operator_);
 		if(operator_ == '=')	break;
 	}
