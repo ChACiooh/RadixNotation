@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 			case '-':
 				operand -= num;
 				break;
-			case '*':
+			case 'x':
 				operand *= num;
 				break;
 			case '/':
