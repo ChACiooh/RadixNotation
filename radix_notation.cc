@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-
+  
 using namespace std;
 
 string RadixNotation(unsigned int number, unsigned int radix);
