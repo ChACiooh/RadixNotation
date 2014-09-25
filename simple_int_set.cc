@@ -9,7 +9,6 @@
 
 #define MAX_SIZE 100
 #define MAX_NUM(x,y)	((x)>(y))?(x):(y)
-#define MIN_NUM(x,y)	((x)<(y))?(x):(y)
 
 using namespace std;
 
@@ -43,8 +42,10 @@ int main()
         len1 = len2 = res_size = setCnt = openCnt = closeCnt = 0;
 
         // process for input
-        while(scanf("%s", buffer[i]) != EOF || setCnt < 2)
+        while(setCnt < 2)
         {
+            int file_stream = scanf("%s", buffer[i]);
+            if(file_stream == EOF)  return 0;
             if(i == 0 && buffer[i][0] != '{')	return 0;
             char temp = getchar();
             if(buffer[i][0] == '{')
