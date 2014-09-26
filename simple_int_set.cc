@@ -106,7 +106,7 @@ int main()
             i++;
             myQ.push(num);
         }
-        if(error)   continue;
+        if(error)   break;
 
         // operating
         switch(operator_)
